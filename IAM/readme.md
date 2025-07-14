@@ -130,18 +130,6 @@ This documentation covers everything you need to understand and set up **IAM (Id
 
 ---
 
-## 📂 Suggested Folder Structure for GitHub
-
-```
-AWS-IAM-DOCS/
-├── README.md
-├── policies/
-│   ├── s3-read-policy.json
-│   └── trust-policy.json
-```
-
----
-
 ## 🧠 Tip for Revision
 
 Bookmark this GitHub repo and keep updating it with:
