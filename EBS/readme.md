@@ -176,18 +176,5 @@ sudo umount /data
 
 ---
 
-## 📂 Suggested GitHub Folder Structure
-
-```
-AWS-EBS-DOCS/
-├── README.md
-├── images/
-│   └── example-snapshot.png
-└── notes/
-    └── mount-fstab-guide.txt
-```
-
----
-
 > ⚡ Mastering EBS gives you power to scale, backup, and protect your AWS workloads with confidence!
 
