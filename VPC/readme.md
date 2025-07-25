@@ -176,81 +176,16 @@ python3 -m http.server 8000
 * Refresh to see load balancing in action
 
 ---
-
-## ✅ Security Group Summary#AWS VPC Architecture with ALB, Auto Scaling Group, NAT Gateway & Bastion Host
-
-![AWS VPC Architecture](vpc.jpeg)
-
-This documentation explains step-by-step how to create a **highly available VPC setup** with:
-
-* 2 Availability Zones (AZs)
-* Public and Private Subnets
-* NAT Gateways for outbound internet access
-* Auto Scaling Group in private subnet (with Launch Template)
-* Bastion Host for SSH access
-* Application Load Balancer (ALB) in public subnet serving traffic to private instances
+## ✅ Security Group Summary
+- **ALB SG** → Allows `HTTP (80)` from Internet  
+- **Private SG** → Allows `port 8000` from ALB SG, `SSH (22)` from Bastion SG  
+- **Bastion SG** → Allows `SSH (22)` from your IP  
 
 ---
 
-## ✅ Architecture Overview
-
-* **VPC** with 2 AZs
-* **Public Subnets** (one in each AZ) → Hosts NAT Gateways & ALB
-* **Private Subnets** (one in each AZ) → Hosts EC2 instances via Auto Scaling Group
-* **Bastion Host** in public subnet for SSH access to private instances
-* **Security Groups** for controlled access
-* **Application Load Balancer** on port 80 → Targets private EC2 instances on port 8000
-
----
-
-## 🛠 Step 1: Create VPC
-
-1. Go to **VPC > Create VPC**
-2. Name: MyVPC
-3. IPv4 CIDR: 10.0.0.0/16
-4. Create VPC
-
----
-
-## 🛠 Step 2: Create Subnets
-
-* Create **4 Subnets**:
-
-  * **Public Subnet 1**: 10.0.1.0/24 in AZ1
-  * **Public Subnet 2**: 10.0.2.0/24 in AZ2
-  * **Private Subnet 1**: 10.0.3.0/24 in AZ1
-  * **Private Subnet 2**: 10.0.4.0/24 in AZ2
-
-Enable **Auto-assign public IP** for Public Subnets only.
-
----
-
-## 🛠 Step 3: Create Internet Gateway & Route Tables
-
-1. Create **Internet Gateway** and attach to VPC
-2. Public Route Table:
-
-   * Add route 0.0.0.0/0 → Internet Gateway
-   * Associate with Public Subnets
-3. Private Route Table:
-
-   * Will route through NAT Gateway later
-
----
-
-## 🛠 Step 4: Create NAT Gateways
-
-
-* **ALB SG** → HTTP(80) from Internet
-* **Private SG** → 8000 from ALB, SSH from Bastion
-* **Bastion SG** → SSH from your IP
-
----
-
-### ✅ Recap
-
-* VPC with 2 AZs, Public & Private Subnets
-* NAT Gateways for internet in Private subnets
-* Auto Scaling Group in private subnet (2–4 instances)
-* Bastion Host for secure SSH
-* ALB distributing traffic from port 80 → port 8000 on instances
+## ✅ Recap
+- VPC with **2 AZs**, Public & Private Subnets  
+- NAT Gateways for internet in Private subnets  
+- Auto Scaling Group in private subnet (**2–4 instances**)  
+- Bastion Host for secure SSH  
+- ALB distributing traffic from `port 80 → port 8000` on instances  
